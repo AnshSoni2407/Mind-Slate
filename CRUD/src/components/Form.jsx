@@ -30,26 +30,28 @@ const Form = ({ fetchData }) => {
         className=" bg-yellow-400 py-10 m-auto rounded-xl text-center w-[95%] mt-4   "
         onSubmit={submitHandler}
       >
-        <h2 className="text-2xl">Enter Your name :</h2>
+        <h2 className="text-2xl">Tittle</h2>
         <input
           value={name}
+          required
           onChange={(e) => {
             setname(e.target.value);
             
           }}
           type="text"
-          placeholder="Enter you name "
+          placeholder="Enter the Tittle"
           className="border-2 border-emerald-400  text-center rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[90%] mb-6"
         />
-        <h2 className="text-2xl ">Enter Your Email :</h2>
+        <h2 className="text-2xl ">Content</h2>
         <input
           type="text"
+          required
           value={email}
           onChange={(e) => {
             setemail(e.target.value);
          
           }}
-          placeholder="Enter your Email "
+          placeholder="write description here.."
           className="border-2 border-emerald-400 rounded  text-center px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[90%] mb-6"
         />
         <br />

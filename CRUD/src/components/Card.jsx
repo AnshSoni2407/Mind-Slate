@@ -2,12 +2,15 @@ import axios from "axios";
 import { React, useState, useEffect } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { FaExpandAlt } from "react-icons/fa";
 
-const Card = () => {
+
+const Card = ({openExpand}) => {
   const [user, setUser] = useState([]);
-  const [editName, seteditName] = useState('')
-  const [editEmail, seteditEmail] = useState('');
-  const [editId, seteditId] = useState('')
+  const [editName, seteditName] = useState("");
+  const [editEmail, seteditEmail] = useState("");
+  const [editId, seteditId] = useState("");
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,36 +52,39 @@ const Card = () => {
     }
   };
 
-
   const handleDelete = async (id) => {
     try {
-      const DeletedUser = await axios.delete(`http://localhost:3006/delete/${id}`);
-      fetchData()
+      const DeletedUser = await axios.delete(
+        `http://localhost:3006/delete/${id}`
+      );
+      fetchData();
     } catch (error) {
-      console.log('failed to delete user', error.message);
+      console.log("failed to delete user", error.message);
     }
   };
 
+
   return (
-    
     <>
+
+
       {user.map((elem) => {
         return (
           <div
             key={elem._id}
-            className="bg-green-400 h-auto w-[80%] md:w-[200px] border-white rounded-xl py-2 px-2 text-center m-2 overflow-hidden"
+            className="bg-green-400 h-[180px] w-[80%] md:w-[200px] border-white rounded-xl py-2 px-2 text-center m-2 overflow-hidden relative"
           >
             {editId === elem._id ? (
               <div className="">
                 <input
                   value={editName}
                   onChange={(e) => seteditName(e.target.value)}
-                  className="mb-2 px-2 py-1 rounded border border-black w-full"
+                  className="mb-2 px-2 py-1 rounded border border-black w-full resize-none"
                 />
-                <input
+                <textarea
                   value={editEmail}
                   onChange={(e) => seteditEmail(e.target.value)}
-                  className="mb-2 px-2 py-1 rounded border border-black w-full"
+                  className="mb-2 px-2 py-1 columns-2 resize-none rounded border border-black w-full"
                 />
                 <button
                   onClick={() => handleUpdate(elem._id)}
@@ -89,14 +95,14 @@ const Card = () => {
               </div>
             ) : (
               <>
-                <h2 className="text-xl font-semibold">
+                <h2 className="text-xl font-semibold line-clamp-1">
                   {" "}
                   {elem.name} <br />{" "}
                 </h2>
-                <h2 className="text-l font-semibold pt-5">
-                   {elem.email}
+                <h2 className="text-l font-semibold pt-5 line-clamp-3 wrap-break-word">
+                  {elem.email}
                 </h2>
-                <div className="mt-5 flex justify-evenly ">
+                <div className=" absolute bottom-2 left-0 w-full px-4 mt-5 flex justify-evenly gap-3 ">
                   <button
                     className="px-2 py-1 bg-blue-600 rounded-xl font-bold text-white"
                     onClick={() => {
@@ -107,6 +113,7 @@ const Card = () => {
                   >
                     <FaEdit />
                   </button>
+
                   <button
                     // onClick={()=>{handleDelete(elem._id);}}
                     onClick={() => {
@@ -117,6 +124,14 @@ const Card = () => {
                     <MdDeleteForever />
                   </button>
                 </div>
+                <button
+                  className=" absolute top-1 right-1 bg-emerald-500 p-1 rounded cursor-pointer"
+                  onClick={(e) => {
+                    openExpand({ title: elem.name, description: elem.email });
+                  }}
+                >
+                  <FaExpandAlt />
+                </button>
               </>
             )}
           </div>
