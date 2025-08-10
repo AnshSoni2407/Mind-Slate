@@ -1,66 +1,3 @@
-// import React from "react";
-// import Card from "./Card";
-// import { useState, useEffect } from "react";
-// import axios from "axios";
-// import { IoCloseOutline } from "react-icons/io5";
-
-// const CardList = () => {
-//   const [User, setUser] = useState([]);
-//   const [expand, setExpand] = useState(false);
-//   const [title, settitle] = useState('');
-//   const [description, setdescription] = useState('');
-
-//   const openExpand = ({ title, description }) => {
-   
-//   settitle(title);
-//     setdescription(description);
-//     console.log(title, description);
-//     setExpand(true);
-//     console.log(`chlla`);
-//   };
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const userdata = await axios.get("http://localhost:3006/getuser");
-
-//         setUser(userdata.data);
-//       } catch (error) {
-//         console.log(`failed to fetch data ${error.message}`);
-//       }
-//     };
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <div className=" w-[95%] flex justify-evenly flex-wrap gap-4 m-auto bg-zinc-600 mt-10 rounded-xl p-4  ">
-//       {User.length > 0 ? (
-//         <Card openExpand={openExpand} />
-//       ) : (
-//         <div className="text-white text-4xl"> No user Found !!</div>
-//       )}
-
-//       {expand && (
-//         <div className=" text-center wrap-break-word fixed top-2 w-[98%] min-h-[80%] h-auto z-10  p-5  bg-red-400 rounded shadow-md">
-//           <button
-//             className="absolute top-1 right-1 p-1 rounded cursor-pointer"
-//             onClick={() => {
-//               setExpand(false);
-//             }}
-//           >
-//             <IoCloseOutline />
-//           </button>
-//           <h3 className="font-extrabold text-4xl mb-5">{title}</h3>
-//           <p className="text-lg overflow-y-scroll"> {description}.</p>
-          
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default CardList;
-
 import React from "react";
 import Card from "./Card";
 import { useState, useEffect } from "react";
@@ -91,7 +28,6 @@ const CardList = () => {
     fetchData();
   }, []);
 
-  // 🛑 Prevent background scroll when modal is open
   useEffect(() => {
     if (expand) {
       document.body.style.overflow = "hidden";
@@ -109,7 +45,7 @@ const CardList = () => {
       {User.length > 0 ? (
         <Card openExpand={openExpand} />
       ) : (
-        <div className="text-white text-4xl"> No user Found !!</div>
+        <div className="text-white text-4xl"> No Data Found !!</div>
       )}
 
       {expand && (
@@ -124,7 +60,7 @@ const CardList = () => {
                           z-50 p-6 bg-white rounded-xl shadow-lg"
           >
             <button
-              className="absolute top-2 right-2 text-xl text-gray-600 hover:text-black"
+              className="fixed top-2 right-2 text-xl text-gray-600 hover:text-black cursor-pointer hover:text-2xl "
               onClick={() => {
                 setExpand(false);
               }}

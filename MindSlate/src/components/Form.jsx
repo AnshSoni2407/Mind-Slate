@@ -40,6 +40,7 @@ const Form = ({ fetchData }) => {
           }}
           type="text"
           placeholder="Enter the Tittle"
+        
           className="border-2 border-emerald-400  text-center rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[90%] mb-6"
         />
         <h2 className="text-2xl ">Content</h2>
@@ -52,10 +53,10 @@ const Form = ({ fetchData }) => {
          
           }}
           placeholder="write description here.."
-          className="border-2 border-emerald-400 rounded  text-center px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[90%] mb-6"
+          className="border-2 border-emerald-400 rounded   text-center px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[90%] mb-6"
         />
         <br />
-        <button className="bg-red-400 w-[50%] p-3 rounded-xl mt-5 hover:bg-red-500 text-xl">
+        <button className="bg-red-400 w-1/4 hover:w-1/2 transition-all duration-300 cursor-pointer p-3 rounded-xl mt-5 hover:bg-red-500 text-xl"> 
           Submit
         </button>
       </form>
