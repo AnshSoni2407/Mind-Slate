@@ -15,7 +15,7 @@ const Card = ({openExpand}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userdata = await axios.get("http://localhost:3006/getuser");
+        const userdata = await axios.get("http://localhost:3006/api/getuser");
 
         setUser(userdata.data);
       } catch (error) {
@@ -28,7 +28,7 @@ const Card = ({openExpand}) => {
   // Move fetchData outside useEffect so it can be reused
   const fetchData = async () => {
     try {
-      const userdata = await axios.get("http://localhost:3006/getuser");
+      const userdata = await axios.get("http://localhost:3006/api/getuser");
       setUser(userdata.data);
     } catch (error) {
       console.log(`failed to fetch data ${error.message}`);
@@ -41,9 +41,9 @@ const Card = ({openExpand}) => {
 
   const handleUpdate = async (id) => {
     try {
-      await axios.put(`http://localhost:3006/getuser/${id}`, {
-        name: editName,
-        email: editEmail,
+      await axios.put(`http://localhost:3006/api/getuser/${id}`, {
+        title: editName,
+        body: editEmail,
       });
       seteditId(null);
       fetchData();
@@ -55,7 +55,7 @@ const Card = ({openExpand}) => {
   const handleDelete = async (id) => {
     try {
       const DeletedUser = await axios.delete(
-        `http://localhost:3006/delete/${id}`
+        `http://localhost:3006/api/delete/${id}`
       );
       fetchData();
     } catch (error) {
@@ -97,18 +97,18 @@ const Card = ({openExpand}) => {
               <>
                 <h2 className="text-xl font-semibold line-clamp-1">
                   {" "}
-                  {elem.name} <br />{" "}
+                  {elem.title} <br />{" "}
                 </h2>
                 <h2 className="text-l font-semibold pt-5 line-clamp-3 wrap-break-word">
-                  {elem.email}
+                  {elem.body}
                 </h2>
                 <div className=" absolute bottom-2 left-0 w-full px-4 mt-5 flex justify-evenly gap-3 ">
                   <button
                     className="px-2 py-1 bg-blue-600 rounded-xl font-bold text-white"
                     onClick={() => {
                       seteditId(elem._id);
-                      seteditName(elem.name);
-                      seteditEmail(elem.email);
+                      seteditName(elem.title);
+                      seteditEmail(elem.body);
                     }}
                   >
                     <FaEdit />
@@ -127,7 +127,7 @@ const Card = ({openExpand}) => {
                 <button
                   className=" absolute top-1 right-1 bg-emerald-500 p-1 rounded cursor-pointer"
                   onClick={(e) => {
-                    openExpand({ title: elem.name, description: elem.email });
+                    openExpand({ title: elem.title, description: elem.body });
                   }}
                 >
                   <FaExpandAlt />

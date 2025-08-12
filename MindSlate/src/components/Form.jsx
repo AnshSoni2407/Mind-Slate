@@ -3,25 +3,25 @@ import axios from 'axios';
 
 
 const Form = ({ fetchData }) => {
-  const [name, setname] = useState("");
-  const [email, setemail] = useState("");
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const Data = {
-    name: name,
-    email: email,
+    title: title,
+    body: body,
   };
 
   const submitHandler = async (e) => {
     // e.preventDefault();
     console.log(`submitted`);
     try {
-      const res = await axios.post("http://localhost:3006/userdata", Data);
+      const res = await axios.post("http://localhost:3006/api/userdata", Data);
       
     } catch (error) {
       console.log(`failed to sent data to Backend`);
     }
 
-    setname("");
-    setemail("");
+    setTitle("");
+    setBody("");
     fetchData()
   };
   return (
@@ -32,11 +32,10 @@ const Form = ({ fetchData }) => {
       >
         <h2 className="text-2xl">Tittle</h2>
         <input
-          value={name}
+          value={title}
           required
           onChange={(e) => {
-            setname(e.target.value);
-            
+            setTitle(e.target.value);
           }}
           type="text"
           placeholder="Enter the Tittle"
@@ -47,10 +46,9 @@ const Form = ({ fetchData }) => {
         <input
           type="text"
           required
-          value={email}
+          value={body}
           onChange={(e) => {
-            setemail(e.target.value);
-         
+            setBody(e.target.value);
           }}
           placeholder="write description here.."
           className="border-2 border-emerald-400 rounded   text-center px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[90%] mb-6"

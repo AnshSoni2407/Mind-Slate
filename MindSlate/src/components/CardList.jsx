@@ -19,7 +19,7 @@ const CardList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userdata = await axios.get("http://localhost:3006/getuser");
+        const userdata = await axios.get("http://localhost:3006/api/getuser");
         setUser(userdata.data);
       } catch (error) {
         console.log(`failed to fetch data ${error.message}`);
